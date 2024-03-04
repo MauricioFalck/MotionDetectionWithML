@@ -31,7 +31,7 @@ class Test_Rule_Engine(unittest.TestCase):
 
     def test_rule_triggered_by_detected_obj(self):
         yolo_obj = yolo.Yolo()
-        img = cv2.imread("./test.jpg")
+        img = cv2.imread("./tests/images/test.jpg")
         detected_objs = yolo_obj.process_frame(img)
         rule = {"detection_objects": ["dog"]}
         rule_eng = rule_engine.RuleEngine(rule)
@@ -41,7 +41,7 @@ class Test_Rule_Engine(unittest.TestCase):
 
     def test_rule_triggered_by_multiple_obj(self):
         yolo_obj = yolo.Yolo()
-        img = cv2.imread("./test.jpg")
+        img = cv2.imread("./tests/images/test.jpg")
         detected_objs = yolo_obj.process_frame(img)
         rule = {"detection_objects": ["dog", "chair"]}
         rule_eng = rule_engine.RuleEngine(rule)
@@ -51,7 +51,7 @@ class Test_Rule_Engine(unittest.TestCase):
 
     def test_reset_trigger(self):
         yolo_obj = yolo.Yolo()
-        img = cv2.imread("./test.jpg")
+        img = cv2.imread("./tests/images/test.jpg")
         detected_objs = yolo_obj.process_frame(img)
         rule = {"detection_objects": ["dog"]}
         rule_eng = rule_engine.RuleEngine(rule)

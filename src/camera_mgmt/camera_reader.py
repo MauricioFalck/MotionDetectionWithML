@@ -23,10 +23,10 @@ class CameraReader:
         """
         Starts to capture frames from the camera
         """
-        Thread(target=self.__get, args=()).start()
+        Thread(target=self._read, args=()).start()
         self.stopped = False
 
-    def __get(self):
+    def _read(self):
         """
         Reads the frame from the camera and assigns it to the frame property. In case there is an error
         when reading, the grabbed property will be False

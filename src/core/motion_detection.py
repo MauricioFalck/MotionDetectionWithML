@@ -47,6 +47,7 @@ class MotionDetection:
             # copies the captured frame to the output components
             self._recorder.frame = self._camera_capture.frame
             self._video_output.frame = self._camera_capture.frame
+            motion_detection_time = None
             # Only runs the detection code if requested in the rules
             if self._rule_eng.rule_objects_to_check != []:
                 # wait some time (stabilization time) for the background subtractor to adjust
@@ -58,6 +59,7 @@ class MotionDetection:
                     if not self._rule_eng.rule_triggered:
                         # checks is the background detector detected motion
                         if self._camera_capture.motion_detected:
+                            motion_detection_time = time.time()
                             # check if the rules are asking for simple motion detection
                             if self._rule_eng.rule_objects_to_check == ["ANY"]:
                                 self._rule_eng.rule_triggered = True
@@ -78,6 +80,8 @@ class MotionDetection:
             if self._rule_eng.rule_triggered:
                 # The code below will only run once after the rule is triggered
                 if not self._recorder.is_running() and not action_executed:
+                    if motion_detection_time is not None:
+                        print(f"Response time: {motion_detection_time - time.time()}")
                     self._recorder.start()
                     action_executed = True
             else:

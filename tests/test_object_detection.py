@@ -9,7 +9,7 @@ class Test_Yolo(unittest.TestCase):
 
     def test_get_valid_yolo_response(self):
         yolo_obj = yolo.Yolo()
-        img = cv2.imread("./test.jpg")
+        img = cv2.imread("./tests/images/test.jpg")
         detected_objs = yolo_obj.process_frame(img)
         self.assertIsNotNone(len(detected_objs) > 0)
 
